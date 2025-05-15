@@ -3,7 +3,7 @@ import ImageGallery from '../components/ImageGallery/ImageGallery';
 import LoadMore from '../components/LoadMore/LoadMore';
 import SearchBar from '../components/SearchBar/SearchBar';
 import { PuffLoader } from 'react-spinners';
-import { fetchImages } from '../galleri.js';
+import getUnsplashData from '../galleri.js';
 import { useState, useEffect } from 'react';
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
         setLoaderIsVisible(true);
         setLoadMoreIsVisible(false);
 
-        const data = await fetchImages(requestPhrase, pageNumber);
+        const data = await getUnsplashData(requestPhrase, pageNumber);
         console.log('API response:', data);
 
         if (data.total_pages > pageNumber) {
