@@ -1,0 +1,24 @@
+.LoadMoreButton {
+    height: 40px;
+    background-color: rgb(158, 47, 145);
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.04em;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    padding: 8px 16px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    margin-bottom: 32px;
+  }
+  .LoadMoreButton:hover {
+    background-color: #d679d5;
+  }
+  .LoadMoreButton:focus,
+.LoadMoreButton:focus-visible {
+  outline: 1px auto rgb(231, 187, 187);
+}
