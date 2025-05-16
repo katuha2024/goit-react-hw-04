@@ -2,6 +2,7 @@ import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 import ImageGallery from '../components/ImageGallery/ImageGallery';
 import LoadMore from '../components/LoadMore/LoadMore';
 import SearchBar from '../components/SearchBar/SearchBar';
+import ImageModal from '../components/ImageModal/ImageModal';
 import { PuffLoader } from 'react-spinners';
 import getUnsplashData from '../galleri.js';
 import { useState, useEffect } from 'react';
@@ -13,24 +14,37 @@ function App() {
   const [loadMoreIsVisible, setLoadMoreIsVisible] = useState(false);
   const [error, setError] = useState(false);
   const [pageNumber, setPageNumber] = useState(1);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [currentShowImg, setCurrentShowImg] = useState(null);
 
   useEffect(() => {
-    if (requestPhrase !== '') {
+    if (requestPhrase.trim() !== '') {
       setGalleryItem([]);
       setPageNumber(1);
     }
   }, [requestPhrase]);
 
+  const showModal = (imgId) => {
+    setCurrentShowImg(imgId);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   useEffect(() => {
     async function getData() {
-      if (requestPhrase === '') return;
+      if (!requestPhrase.trim()) return;
 
       try {
         setLoaderIsVisible(true);
         setLoadMoreIsVisible(false);
 
-        const data = await getUnsplashData(requestPhrase, pageNumber);
-        console.log('API response:', data);
+        const data = await getUnsplashData({
+          query: requestPhrase,
+          page: pageNumber,
+        });
 
         if (data.total_pages > pageNumber) {
           setLoadMoreIsVisible(true);
@@ -55,7 +69,7 @@ function App() {
 
   const onSubmit = (inputPhrase) => {
     setPageNumber(1);
-    setRequestPhrase(inputPhrase);
+    setRequestPhrase(inputPhrase.trim());
   };
 
   const loadMore = () => {
@@ -66,11 +80,12 @@ function App() {
     <>
       <SearchBar getRequestPhrase={onSubmit} />
       {galleryItem.length > 0 && <ImageGallery imagesData={galleryItem} />}
-      {loaderIsVisible && (
-        <PuffLoader color="#1561f4" cssOverride={{}} className="loader" />
-      )}
+      {loaderIsVisible && <PuffLoader color="#1561f4" className="loader" />}
       {error && <ErrorMessage />}
       {loadMoreIsVisible && <LoadMore onLoadMore={loadMore} />}
+      {modalVisible && (
+        <ImageModal isOpen={modalVisible} onClose={closeModal} currentImg={currentShowImg} />
+      )}
     </>
   );
 }
