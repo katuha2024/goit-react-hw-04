@@ -24,8 +24,8 @@ function App() {
     }
   }, [requestPhrase]);
 
-  const showModal = (imgId) => {
-    setCurrentShowImg(imgId);
+  const showModal = (imgData) => {
+    setCurrentShowImg(imgData);
     setModalVisible(true);
   };
 
@@ -79,7 +79,10 @@ function App() {
   return (
     <>
       <SearchBar getRequestPhrase={onSubmit} />
-      {galleryItem.length > 0 && <ImageGallery imagesData={galleryItem} />}
+      {galleryItem.length > 0 && (
+  <ImageGallery imagesData={galleryItem} showModal={showModal} />
+)}
+
       {loaderIsVisible && <PuffLoader color="#1561f4" className="loader" />}
       {error && <ErrorMessage />}
       {loadMoreIsVisible && <LoadMore onLoadMore={loadMore} />}

@@ -1,6 +1,8 @@
 .LoadMoreButton {
+  display: block;
     height: 40px;
-    background-color: rgb(158, 47, 145);
+    background-color: blue;
+    justify-content: center;
     font-family: Montserrat, sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -16,7 +18,7 @@
     margin-bottom: 32px;
   }
   .LoadMoreButton:hover {
-    background-color: #d679d5;
+    background-color: #4078a8;
   }
   .LoadMoreButton:focus,
 .LoadMoreButton:focus-visible {

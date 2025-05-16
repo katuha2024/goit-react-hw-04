@@ -2,7 +2,7 @@ import mycss from './ImageCard.module.css';
 
 export default function ImageCard({ imgData, showModal }) {
   const handleOpenModal = () => {
-    showModal(imgData.id); // передаємо тільки ID
+    showModal(imgData); 
   };
 
   return (

@@ -6,7 +6,7 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 Modal.setAppElement("#root");
 
 
-export default function ImgModal({ onClose, currentImg, isOpen }) {
+export default function ImageModal({ onClose, currentImg, isOpen }) {
   return (
     <Modal
       isOpen={isOpen}
@@ -28,7 +28,7 @@ export default function ImgModal({ onClose, currentImg, isOpen }) {
           backgroundColor: "transparent",
         },
         overlay: {
-          backgroundColor: "rgba(0, 0, 0, 0.75)",
+          backgroundColor: "rgba(41, 11, 123, 0.75)",
           zIndex: 999,
         },
         base: {
